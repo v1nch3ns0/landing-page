@@ -13,10 +13,10 @@ document.addEventListener('DOMContentLoaded', () => {
   revealOnScroll();
 
   // Smooth scroll for nav links
-  document.querySelectorAll('.nav-links a').forEach(link => {
+  document.querySelectorAll('.nav-links a, .footer-links a').forEach(link => {
     link.addEventListener('click', function(e) {
       const href = this.getAttribute('href');
-      if (href.startsWith('#')) {
+      if (href && href.startsWith('#')) {
         const target = document.querySelector(href);
         if (target) {
           e.preventDefault();
@@ -25,4 +25,14 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
   });
+
+  // Prevent form submission for demo
+  const ctaForm = document.querySelector('.cta-form');
+  if (ctaForm) {
+    ctaForm.addEventListener('submit', e => {
+      e.preventDefault();
+      ctaForm.reset();
+      alert('Thank you for joining the waitlist!');
+    });
+  }
 });
